@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false })) //solo datos json
 
 
 //################# Routes ###################################
-//app.use(require(path.join(__dirname, 'Services/ejemplo.js'))); //poner rutas
+app.use(require(path.join(__dirname, './Services/UserServices.js'))); //poner rutas
 
 
 
