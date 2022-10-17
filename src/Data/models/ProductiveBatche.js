@@ -3,22 +3,27 @@ const { Schema } = mongoose;
 
 const ProductiveBatcheSchema = new Schema({
     //Información general del lote
-    idSystem: { type: String, required: true },
+    idSystem: { type: String, required: true }, //*por defecto
 
     creation: {
-        date: { type: Date, required: true },
-        userId: { type: Date, required: true }
+        date: { type: Date, required: true }, //*por defecto
+        userId: { type: Date, required: true } //*por defecto
     },
 
-    properties: {
-        typePB: { type: String, required: true }, //puede sobrar
-        specie: { type: String, required: true },
-    },
 
-    //1. Etapa de reproducción
+    specie: { type: String, required: true },
+
+    notes: { type: String },
+
+    //1. Etapa de reproducción. Etapa de inicio del proceso**
     reproduction: {
         date: { type: Date },
-        pondsCollections: [{
+        broodstockponds: [{
+            idPond: { type: String },
+            nFemales: {},
+            nMales: {},
+        }],
+        spawnerponds: [{
             idPond: { type: String },
             nFemales: {},
             nMales: {},
