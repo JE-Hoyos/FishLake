@@ -1,0 +1,35 @@
+<div class="card p-2">
+    <h3 class="fs-4">Iniciar un nuevo lote</h3>
+    <!-- Especie -->
+    <div>
+        <label for="input" class="col-form-label">Seleccione la especie a reproducir</label>
+        <select class="form-select" aria-label="Default select" name="specie">
+        <option selected="">Seleccione una opción</option>
+        <%try{%>
+        <% if (object){%>
+        <% for( i=0; i<object.settings.species.length; i++){%>
+        <option value="<%=object.settings.species[i].comunSpecie%>"><%=object.settings.species[i].comunSpecie%></option>
+        <%}%>
+        <%}%>
+        <%}catch(e){%>
+            <option selected="">No cuenta con especies registradas</option>
+            <%}%>
+    </select>
+    </div>
+
+    <!-- fecha de la captura -->
+    <div class="mb-2">
+        <div>
+            <label for="" class="col-form-label">Fecha de captura de reproductores</label>
+        </div>
+        <div>
+            <input type="date" class="form-control" id="" , name="reprodDate">
+        </div>
+    </div>
+
+    <!-- Notas/observaciones -->
+    <div class="form-floating">
+        <textarea class="form-control" placeholder="" id="floatingTextarea" style="height: 100px" name="notes"></textarea>
+        <label for="floatingTextarea">Notas/observaciones:</label>
+    </div>
+</div>

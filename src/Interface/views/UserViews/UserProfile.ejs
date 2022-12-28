@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sp">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de usuario</title>
+
     <link rel="shortcut icon" href="./icons/pond.png">
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
@@ -32,7 +33,7 @@
                     <%if(user.gender=="Female"){%>
                         <img src="./Icons/userFemale.png" alt="" width="100px" class="rounded-circle">
                         <%}else if(user.gender=="Male"){%>
-                            <img src="./Icons/userFemale.png" alt="" width="100px" class="rounded-circle">
+                            <img src="./Icons/userMale.png" alt="" width="100px" class="rounded-circle">
                             <%}else{%>
                                 <img src="./Icons/unkonow.png" alt="" width="100px" class="rounded-circle">
                                 <%}%>
@@ -40,28 +41,76 @@
                                         <h2>
                                             <%=user.name%>
                                         </h2>
+                                        <a href="/Logout"> Cerrar Sesión </a>
                                         <%}%>
         </div>
         <!-- Tarjeta de datos de usuario -->
-        <p>
-            <%=user%>
-        </p>
-        <a href="/LogOut"> Cerrar sesión </a>
+        <div class="container-sm">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5>Información de usuario</h5>
+                </div>
+                <div class="card-body text-center">
+                    <p class="card-text"> <span>Nombre: </span>
+                        <%=user.name%>
+                            <%=user.family_name%>
+                    </p>
 
-
+                    <p class="card-text"> <span>Profesión: </span>
+                        <%=user.profession%>
+                    </p>
+                    <a href="#" class="">Editar</a>
+                </div>
+            </div>
+        </div>
 
         <div class="container text-center">
-            <h2>Sistema productivo administrado:</h2>
-            <%if(user.idSystem){%>
-                <p>Sistema productivo</p>
+            <h3>Sistema productivo administrado:</h3>
+            <%if(user.idSystem.id){%>
+
+                <div class="container m-3">
+                    <div class="card">
+                        <h5 class="">
+                            <%=user.idSystem.name%>
+                        </h5>
+
+                        <a href="/Profile_system"> <button class="btn btn-success">visitar el sistema</button></a>
+
+                    </div>
+                </div>
+
                 <%}else{%>
                     <p>¡No tienes un sistema creado!</p>
                     <p>Registra ahora tu sistema productivo y empeza a usar las herramientas de <span>FishLake</span></p>
-                    <a href="/SystemForm"><button>Registrar ahora</button></a>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#SystemModal">Registrar ahora</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="SystemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center" id="exampleModalLabel">Registro de sistema productivo</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card p-2 m-2">
+
+                                        <form action="/Create-system" method="post">
+                                            <%-include('./SystemForm')%>
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                     <%}%>
-
-
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
 

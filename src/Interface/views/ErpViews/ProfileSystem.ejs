@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del sistema</title>
+
+    <link rel="shortcut icon" href="./icons/pond.png">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+    <!--** Contenedo principal** -->
+    <div class="container-fluid">
+
+        <!-- Validaciones de mensaje -->
+        <% if (successMessage =='success'){%>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Acción realizada correctamente
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%}%>
+
+                <% if (signUpErr =='err'){%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        No se pudo realizar la acción, es posible que no tenga los permisos necesarios.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <%}%>
+
+                        <div class="row">
+                            <!-- Contenedor de sistema y opciones-->
+                            <div class="col-lg-3">
+                                <h2 class="fs-3 text-center"> Bienvenidos a:</h2>
+                                <%if(system.photo){%>
+                                    <div>
+                                        <img src="<%=system.name%>" alt="" width="100px" class="rounded-circle">
+
+                                        <h3>
+                                            <%=system.name%>
+                                        </h3>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="">
+                                            <div class="text-center">
+                                                <img src="./Icons/pond.png" alt="" width="150px" class="rounded-circle">
+                                            </div>
+                                            <h3 class="text-center fs-3">
+                                                <%=system.name%>
+                                            </h3>
+                                        </div>
+                                        <%}%>
+
+                                            <div id="descrip-system">
+                                                <p class="text-center">
+                                                    <%=system.location.country%> ,
+                                                        <%=system.location.department%>.
+                                                </p>
+                                            </div>
+
+                                            <hr class="m-1">
+
+                                            <!-- opciones del sistema -->
+                                            <div class="card">
+                                                <h3 class="fs-6 m-3 mb-1">Especies trabajadas:</h3>
+                                                <div class="">
+                                                    <ul>
+                                                        <%for(var i=0; i<system.species.length; i++){%>
+                                                            <li>
+                                                                <%=system.species[i].comunSpecie%>
+                                                            </li>
+                                                            <%}%>
+                                                    </ul>
+                                                </div>
+
+                                                <%if(user.userType == 'Master'){%>
+                                                    <button class="btn btn-success m-3 mt-1" data-bs-toggle="modal" data-bs-target="#specieModal">(+)Especie</button>
+
+                                                    <!-- Modal formulario nueva especie-->
+                                                    <div class="modal fade" id="specieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-center" id="exampleModalLabel">Nueva Especie</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="card p-2 m-2">
+
+                                                                        <!-- especieForm -->
+                                                                        <form action="/AddSpecie" method="post">
+                                                                            <div>
+                                                                                <label for="formControlInput" class="form-label">Nombre común:</label>
+                                                                                <input type="text" class="form-control" id="" placeholder="" name="comunSpecie">
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <label for="formControlInput" class="form-label">Nombre cientifico:</label>
+                                                                                <input type="text" class="form-control" id="" placeholder="" name="scientSpecie">
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+                                            </div>
+                                            <!-- centros de costos -->
+                                            <div class="card mt-1">
+                                                <h3 class="fs-6 m-3 mb-1">Centros de costos:</h3>
+                                                <div class="m-3">
+                                                    <ul>
+                                                        <%for(var i=0; i<system.costCenters.length; i++){%>
+                                                            <li>
+                                                                <%=system.costCenters[i].nameCostCenters%>
+                                                            </li>
+                                                            <%}%>
+                                                    </ul>
+                                                </div>
+                                                <%if(user.userType == 'Master'){%>
+                                                    <button class="btn btn-success m-3 mt-1" data-bs-toggle="modal" data-bs-target="#centerCostModal">(+)Centro de costo</button>
+
+                                                    <!-- Modal formulario nueva especie-->
+                                                    <div class="modal fade" id="centerCostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-center" id="">Nuevo centro de costos</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="card p-2 m-2">
+
+                                                                        <!-- especieForm -->
+                                                                        <form action="/AddCostCenter" method="post">
+                                                                            <div>
+                                                                                <label for="formControlInput" class="form-label">Nombre del centro:</label>
+                                                                                <input type="text" class="form-control" id="" placeholder="" name="nameCostCenters">
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <label for="formControlInput" class="form-label">Descripción corta:</label>
+                                                                                <input type="text" class="form-control" id="" placeholder="" name="descript">
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <%}%>
+                                            </div>
+                            </div>
+                            <!-- Contenedor de tareas -->
+                            <div class="col ">
+                                <div class="row">
+                                    <%-include('./partials/navigation.ejs')%>
+                                </div>
+                                <div class="row row-cols-lg-4 g-3 mt-3">
+
+                                    <!-- Colaboradores -->
+                                    <div class="col">
+                                        <div class=" text-center">
+                                            <div class="d-inline-block p-2">
+                                                <a href="/callColabs">
+                                                    <div class="text-center mb-2">
+                                                        <img src="./Icons/network.png" width="60px" alt="">
+                                                    </div>
+                                                    <button class="btn btn-primary">Colaboradores</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Estanques -->
+                                    <div class="col">
+                                        <div class="container text-center">
+                                            <div class="d-inline-block p-2">
+                                                <a href="/callPonds">
+                                                    <div class="text-center mb-2">
+                                                        <img src="./Icons/pond2.png" width="60px" alt="">
+                                                    </div>
+
+                                                    <button class="btn btn-primary">Estanques</button>
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Lotes -->
+                                    <div class="col">
+                                        <div class="container text-center">
+                                            <div class="d-inline-block p-2">
+                                                <a href="/callBatches">
+                                                    <div class="text-center mb-2">
+                                                        <img src="./Icons/fish.png" width="60px" alt="">
+                                                    </div>
+
+                                                    <button class="btn btn-primary">Lotes de producción</button>
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Egresos -->
+                                    <div class="col">
+                                        <div class="container text-center">
+                                            <div class="d-inline-block p-2">
+                                                <a href="#">
+                                                    <div class="text-center mb-2">
+                                                        <img src="./Icons/outlay.png" width="60px" alt="">
+                                                    </div>
+
+                                                    <button class="btn btn-primary">Egresos</button>
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Almacen de insumos -->
+                                    <div class="col">
+                                        <div class="container text-center">
+                                            <div class="d-inline-block p-2">
+                                                <a href="#">
+                                                    <div class="text-center mb-2">
+                                                        <img src="./Icons/almacenamiento.png" width="60px" alt="">
+                                                    </div>
+                                                    <button class="btn btn-primary">Almacen de insumos</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- clientes -->
+                                    <div class="col">
+                                        <div class="container text-center">
+                                            <div class="d-inline-block p-2">
+                                                <a href="#">
+                                                    <div class="text-center mb-2">
+                                                        <img src="./Icons/handshake.png" width="60px" alt="">
+                                                    </div>
+                                                    <button class="btn btn-primary">Clientes</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+    </div>
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
+</body>
+
+</html>

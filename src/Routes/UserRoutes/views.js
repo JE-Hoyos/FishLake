@@ -18,9 +18,4 @@ router.get('/SystemProfile', (req, res) => {
 });
 
 
-// create system
-router.get('/SystemForm', (req, res) => {
-    res.render('./UserViews/SystemForm')
-});
-
 module.exports = router;

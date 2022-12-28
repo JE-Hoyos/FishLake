@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const systemSchema = new Schema({
-    date: { type: Date, required: true },
+    date: { type: Date, required: true, default: () => Date.now() },
     idUserMaster: { type: String, required: true },
     name: { type: String, required: true },
     location: {
@@ -13,11 +13,14 @@ const systemSchema = new Schema({
     },
     descript: { type: String },
     costCenters: [{
-        nameCostCenters: { type: String }
+        nameCostCenters: { type: String },
+        descript: { type: String }
     }],
     settings: {},
-    users: [],
-    galery: []
+    species: [{
+
+    }],
+    galery: [],
 });
 
 module.exports = mongoose.model('System', systemSchema);

@@ -6,10 +6,10 @@ const ProductiveBatcheSchema = new Schema({
     idSystem: { type: String, required: true }, //*por defecto
 
     creation: {
-        date: { type: Date, required: true }, //*por defecto
-        userId: { type: Date, required: true } //*por defecto
+        reprodDate: { type: Date, required: true }, //*por defecto
+        userId: { type: String, required: true }, //*por defecto
+        createDate: { type: Date, required: true, default: () => Date.now() }
     },
-
 
     specie: { type: String, required: true },
 
@@ -17,11 +17,13 @@ const ProductiveBatcheSchema = new Schema({
 
     //1. Etapa de reproducción. Etapa de inicio del proceso**
     reproduction: {
-        date: { type: Date },
         broodstockponds: [{
-            idPond: { type: String },
-            nFemales: {},
-            nMales: {},
+            date: { type: Date },
+            idPond: { type: Schema.Types.ObjectId, ref: "Pond" },
+            nFemales: { type: Number },
+            nMales: { type: Number },
+            nFemalesFer: { type: Number },
+            nMalesFer: { type: Number },
         }],
         spawnerponds: [{
             idPond: { type: String },
@@ -45,7 +47,6 @@ const ProductiveBatcheSchema = new Schema({
 
     //2. Etapa de ovicultura
     oviculture: {
-
         date: { type: Date },
         pondsCollections: [{
             idPond: { type: String },

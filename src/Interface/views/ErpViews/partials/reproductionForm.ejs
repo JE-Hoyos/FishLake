@@ -1,0 +1,72 @@
+<div class="p-2">
+    <h3 class="fs-4">1. Captura y selección de reproductores</h3>
+    <!-- Estanque de reproductores -->
+    <div class="card p-2">
+        <h4 class="fs-6">1.1.Estanques de captura</h4>
+        <label for="input" class="col-form-label">Seleccione el estanque de reproductores</label>
+        <select class="form-select" aria-label="Default select" name="pond">
+        <option selected="">Seleccione una opción</option>
+        <%try{%>
+        <% if (ponds){%>
+        <% for( i=0; i<ponds.length; i++){%>
+            <% if (ponds[i].typePond == 'Reproductores' ){%>
+        <option value="<%=ponds[i]._id%>"><%=ponds[i].name%></option>
+        <%}%>
+        <%}%>
+        <%}%>
+        <%}catch(e){%>
+            <option selected="">No cuenta con estanques</option>
+            <%}%>
+    </select>
+        <a href="/CallPonds"> Visitar estanques</a>
+
+        <div>
+            <label for="" class="">Número de hembras:</label>
+            <input type="Number" class="form-control" name="nFemales" placeholder="">
+            <label for="" class="">Número de machos:</label>
+            <input type="Number" class="form-control" name="nMales" placeholder="">
+        </div>
+    </div>
+
+    <!-- Estanques de inducción -->
+    <div class=" card mt-2 p-2">
+        <h4 class="fs-6">1.2.Estanques de inducción y desove</h4>
+        <label for="input" class="col-form-label">Seleccione el estanque </label>
+        <select class="form-select" aria-label="Default select" name="PondDes">
+        <option selected="">Seleccione una opción</option>
+        <%try{%>
+        <% if (ponds){%>
+        <% for( i=0; i<ponds.length; i++){%>
+            <% if (ponds[i].typePond == 'Desove' || ponds[i].typePond == 'General' ){%>
+        <option value="<%=ponds[i]._id%>"><%=ponds[i].name%></option>
+        <%}%>
+        <%}%>
+        <%}%>
+        <%}catch(e){%>
+            <option selected="">No cuenta con estanques</option>
+            <%}%>
+    </select>
+        <a href="/CallPonds"> Visitar estanques</a>
+        <div>
+            <p>Cantidad de reproductores</p>
+            <label for="" class="">Número de hembras:</label>
+            <input type="Number" class="form-control" name="nFemalesRep" placeholder="">
+            <label for="" class="">Número de machos:</label>
+            <input type="Number" class="form-control" name="nMalesRep" placeholder="">
+        </div>
+        <hr>
+        <div class="m-1">
+            <p>Ovas producidas</p>
+            <label for="" class="">Litros de huevos:</label>
+            <input type="Number" class="form-control" name="eggs" placeholder="">
+        </div>
+    </div>
+
+    <!-- Notas/observaciones -->
+    <div class="form-floating mt-2">
+        <textarea class="form-control" placeholder="" id="floatingTextarea" style="height: 100px" name="notes"></textarea>
+        <label for="floatingTextarea">Notas/observaciones:</label>
+    </div>
+
+    <input type="hidden" class="form-control" name="idBatche" value="<%=batche._id%>">
+</div>

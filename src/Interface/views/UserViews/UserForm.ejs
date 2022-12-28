@@ -28,61 +28,69 @@
 
                     <!-- contenedor de formulario -->
                     <div class="container">
-                        <h1>¡Bienvenido!</h1>
-                        <h2>Estamos felices de que estés aquí</h2>
-                        <h3>Crea tu usuario maestro, con este podras configurar un sistema productivo, conectar con colaboradores y empezar a gestionar la información de la empresa</h2>
+                        <div class="card m-3 p-4">
+                            <h1>¡Bienvenido!</h1>
+                            <h2>Estamos felices de que estés aquí</h2>
+                            <h3>Crea tu usuario maestro, con este podras configurar un sistema productivo, conectar con colaboradores y empezar a gestionar la información de la empresa</h2>
 
-                            <form action="/SignUp" method="post">
-                                <!-- Nombres -->
-                                <div>
-                                    <label for="formControlInput" class="form-label">Nombres:</label>
-                                    <input type="text" class="form-control" id="" placeholder="" name="firstname">
-                                    <label for="formControlInput" class="form-label">Apellidos:</label>
-                                    <input type="text" class="form-control" id="" placeholder="" name="lastname">
-
-                                    <!-- Profesión -->
-                                </div>
-                                <label for="formControlInput" class="form-label">Profesión:</label>
-                                <input type="text" class="form-control" id="" placeholder="" name="professional">
-                                <div>
-
-                                    <!-- Genero -->
+                                <form action="/SignUp" method="post">
+                                    <!-- Nombres -->
                                     <div>
-                                        <label for="input" class="col-sm-2 col-form-label">Género:</label>
-                                        <select class="form-select" aria-label="Default select" name="gender">
+                                        <label for="formControlInput" class="form-label">Nombres:</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="firstname">
+                                        <label for="formControlInput" class="form-label">Apellidos:</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="lastname">
+
+                                        <!-- Cargo -->
+                                    </div>
+                                    <label for="formControlInput" class="form-label">Cargo:</label>
+                                    <input type="text" class="form-control" id="" placeholder="" name="position">
+                                    <div>
+
+                                        <!-- Profesión -->
+                                    </div>
+                                    <label for="formControlInput" class="form-label">Profesión:</label>
+                                    <input type="text" class="form-control" id="" placeholder="" name="professional">
+                                    <div>
+
+                                        <!-- Genero -->
+                                        <div>
+                                            <label for="input" class="col-sm-2 col-form-label">Género:</label>
+                                            <select class="form-select" aria-label="Default select" name="gender">
                                         <option selected="">Seleccione una opción</option>
                                         <option value="Male">Masculino</option>
                                         <option value="Female">Femenino</option>
                                         <option value="Other">Otro</option>
                                     </select>
+                                        </div>
+
+                                    </div>
+                                    <!-- Correo -->
+                                    <div>
+                                        <label for="formControlInput" class="form-label">Correo electrónico:</label>
+                                        <input type="email" class="form-control" id="" placeholder="name@example.com" name="email">
+                                    </div>
+                                    <!-- Celular -->
+                                    <div>
+                                        <label for="formControlInput" class="form-label">Celular:</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="telphone">
+                                    </div>
+                                    <!-- Password -->
+                                    <div>
+                                        <label for="formControlInput" class="form-label">Asigna tú contraseña:</label>
+                                        <input id="pass1" type="password" class="form-control" id="" name="passone">
+                                        <label for="formControlInput" class="form-label">Confirma tú contraseña:</label>
+                                        <input id="passConfirm" type="password" class="form-control" id="" name="passconfirm">
                                     </div>
 
-                                </div>
-                                <!-- Correo -->
-                                <div>
-                                    <label for="formControlInput" class="form-label">Correo electrónico:</label>
-                                    <input type="email" class="form-control" id="" placeholder="name@example.com" name="email">
-                                </div>
-                                <!-- Celular -->
-                                <div>
-                                    <label for="formControlInput" class="form-label">Celular:</label>
-                                    <input type="text" class="form-control" id="" placeholder="" name="telphone">
-                                </div>
-                                <!-- Password -->
-                                <div>
-                                    <label for="formControlInput" class="form-label">Asigna tú contraseña:</label>
-                                    <input id="pass1" type="password" class="form-control" id="" name="passone">
-                                    <label for="formControlInput" class="form-label">Confirma tú contraseña:</label>
-                                    <input id="passConfirm" type="password" class="form-control" id="" name="passconfirm">
-                                </div>
-
-                                <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary">
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary">
                         Registrar
                     </button>
-                                    <a href="/"> Mejor en otra ocasión</a>
-                                </div>
-                            </form>
+                                        <a href="/"> Mejor en otra ocasión</a>
+                                    </div>
+                                </form>
+                        </div>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
 </body>

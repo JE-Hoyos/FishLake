@@ -4,7 +4,12 @@ const { Schema } = mongoose;
 const incomeSchema = new Schema({
     date: { type: Date, required: true },
     idSystem: { type: String, required: true },
-    features: {}
+    idCustomer: { type: String },
+    features: {
+        amount: {},
+        price: {},
+        destinationPlace: {}
+    }
 
 });
 

@@ -1,0 +1,58 @@
+<div class="p-2">
+    <h3 class="fs-4">1. Captura y selección de reproductores</h3>
+
+    <!-- Estanque de reproductores -->
+    <div class="card p-2">
+        <h4 class="fs-6">1.1.Estanques de captura</h4>
+        <label for="input" class="col-form-label">Seleccione el estanque de reproductores</label>
+        <select class="form-select" aria-label="Default select" name="pond">
+        <option selected="">Seleccione una opción</option>
+        <%try{%>
+        <% if (ponds){%>
+        <% for( i=0; i<ponds.length; i++){%>
+            <% if (ponds[i].typePond == 'Reproductores' ){%>
+        <option value="<%=ponds[i]._id%>"><%=ponds[i].name%></option>
+        <%}%>
+        <%}%>
+        <%}%>
+        <%}catch(e){%>
+            <option selected="">No cuenta con estanques</option>
+            <%}%>
+    </select>
+        <a href="/CallPonds"> Visitar estanques</a>
+
+
+        <!-- fecha de la captura -->
+        <div class="mb-2">
+            <div>
+                <label for="" class="col-form-label">Fecha de captura de reproductores</label>
+            </div>
+            <div>
+                <input type="date" class="form-control" id="" , name="reprodDate">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="" class="">Número de hembras capturadas:</label>
+                <input type="Number" class="form-control" name="nFemales" placeholder="">
+            </div>
+            <div class="col">
+                <label for="" class="">Número de hembras fertiles:</label>
+                <input type="Number" class="form-control" name="nFemalesFer" placeholder="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="" class="">Número de Machos capturados:</label>
+                <input type="Number" class="form-control" name="nMales" placeholder="">
+            </div>
+            <div class="col">
+                <label for="" class="">Número de machos fertiles:</label>
+                <input type="Number" class="form-control" name="nMalesFer" placeholder="">
+            </div>
+        </div>
+
+        <input type="hidden" class="form-control" name="idBatche" value="<%=batche._id%>">
+    </div>

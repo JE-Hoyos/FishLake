@@ -1,8 +1,10 @@
 const passport = require('passport');
 const localStrategy = require('passport-local');
-const User = require('../../Data/models/User');
-//const jwt = require('jsonwebtoken');
+const User = require('../../Data/models/User.js');
+const System = require('../../Data/models/System.js');
 require('dotenv').config();
+
+const sessions = require('express-session');
 
 //Aplicación de passport- estrategía local para crear usuario e iniciar sesion
 
@@ -25,7 +27,7 @@ passport.use('local-signup', new localStrategy({
     passReqToCallback: true
 
 }, async(req, email, password, done) => {
-    const { firstname, lastname, gender, professional, telphone, passone, passconfirm } = req.body
+    const { firstname, lastname, gender, position, professional, telphone, passone, passconfirm } = req.body
 
     //validar existencia de usuario
     validUser = await User.findOne({ email: email })
@@ -43,6 +45,7 @@ passport.use('local-signup', new localStrategy({
                     name: firstname,
                     family_name: lastname,
                     gender: gender,
+                    position: position,
                     profession: professional,
                     email: email,
                     telphone: telphone,
@@ -91,3 +94,47 @@ passport.use('local-signIn', new localStrategy({
 
     }
 }));
+
+//Crear sistema productivo
+
+const createSystem = async(req, res) => {
+
+    //capturar datos de formulario
+    const { nameSystem, country, departament, lon, lat, descript } = req.body;
+    const userId = req.user._id;
+
+    //Instanciar el objeto system
+    const system = new System({
+        idUserMaster: userId,
+        name: nameSystem,
+        location: {
+            country: country,
+            department: departament,
+            latitude: lon,
+            longitude: lat,
+        },
+        descript: descript
+
+    })
+
+    //Guardar un nuevo sistema
+    await system.save();
+
+    const idSystemUser = {
+        id: system._id,
+        name: system.name
+    }
+
+    //Editar el usuario
+    await User.findByIdAndUpdate(userId, {
+        idSystem: {
+            id: system._id,
+            name: system.name
+        }
+    });
+
+    //Responder con la nueva vista del sistema
+    res.redirect('./Profile');
+};
+
+module.exports = { createSystem }

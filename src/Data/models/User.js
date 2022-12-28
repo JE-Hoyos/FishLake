@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
-
 const userSchema = new Schema({
     date: { type: Date, required: true, default: () => Date.now() },
     userType: { type: String, required: true },
@@ -10,14 +9,34 @@ const userSchema = new Schema({
     given_name: { type: String },
     family_name: { type: String, required: true },
     gender: { type: String },
+    position: { type: String },
     profession: { type: String },
     email: { type: String, required: true, unique: true },
     email_verified: { type: Boolean, default: 'false' },
     telphone: { type: String },
     photo: { type: String },
-    invitation: {},
-    idSystem: {},
-    encryptedPass: {}
+
+    salary: {
+        total: { type: Number },
+        hours: { type: Number }
+    },
+
+    idSystem: {
+        id: { type: String },
+        name: { type: String }
+    },
+
+    encryptedPass: {},
+
+    permissions: {
+        newColabs: { type: Boolean },
+        storeAndShopping: { type: Boolean },
+        ponds: { type: Boolean },
+        batches: { type: Boolean },
+        sales: { type: Boolean },
+        customers: { type: Boolean },
+        costs: { type: Boolean }
+    },
 });
 
 //Extensión de metodo de encriptado de contraseña
@@ -27,7 +46,6 @@ userSchema.methods.encryptPassword = async(password) => {
 };
 
 //Extensión de metodo de comparación de contraseñas
-
 userSchema.methods.comparePassword = async(password, recivedPassword) => {
     return await bcrypt.compare(password, recivedPassword);
 

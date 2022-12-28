@@ -51,12 +51,10 @@ app.use(passport.session());
 app.use((req, res, next) => {
     app.locals.signUpErr = req.flash('signUpErr');
     app.locals.signInErr = req.flash('signInErr');
+    app.locals.successMessage = req.flash('successMessage');
     app.locals.user = req.user;
     next();
 });
-
-
-
 
 //################# Routes ###################################
 // user services
@@ -65,7 +63,7 @@ app.use(require(path.join(__dirname, './Routes/UserRoutes/auth.js')));
 
 
 //erp services
-app.use(require(path.join(__dirname, './Routes/EprRoutes/views.js')));
+app.use(require(path.join(__dirname, './Routes/EprRoutes/systemRoutes.js')));
 
 //################ Static files ##############################
 app.use(express.static(path.join(__dirname, 'Interface/public')));
