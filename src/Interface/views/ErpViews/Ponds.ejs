@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="sp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estanques</title>
+
+    <link rel="shortcut icon" href="./icons/pond.png">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+</head>
+
+<body>
+    <!--contenedor principal  -->
+    <div class="container-fluid">
+        <!-- Navegación -->
+        <div class="row">
+            <%-include('./Components/navigation.ejs')%>
+        </div>
+        <!-- Validaciones de mensaje -->
+        <% if (successMessage =='success'){%>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Acción realizada correctamente
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%}%>
+
+                <% if (signUpErr =='err'){%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        No se pudo realizar la acción, es posible que no tenga los permisos necesarios.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <%}%>
+
+                        <!-- cabecera -->
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>Estanques e incubadoras</h1>
+                            </div>
+
+                            <div class=" col p-2 mt-2">
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PondModal">(+)Estanque</button>
+                            </div>
+
+                        </div>
+                        <!-- Modal formulario nuevo estanque -->
+                        <div class="modal fade" id="PondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-center" id="exampleModalLabel">Nuevo Estanque o Incubadora</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card p-2 m-2">
+                                            <!-- colabForm -->
+                                            <form action="/New_pond" method="post">
+                                                <%-include('./Forms/pondForm.ejs')%>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- visualización de tarjetas -->
+                        <div class="row row-cols-1 row-cols-sm-4 g-3 mt-5">
+                            <!-- poner la logica -->
+
+                            <%for(var i=0; i<ponds.length; i++){%>
+                                <div class="col">
+                                    <div class="card text-center">
+                                        <div class="d-inline-block p-2">
+
+
+                                            <%if (ponds[i].photo){%>
+                                                <div class="m-2">
+                                                    <img src="<%=colabs[i].photo%>" alt="" width="60px" class="rounded-circle">
+                                                </div>
+                                                <%}else{%>
+                                                    <img src="./Icons/Pond2.png" alt="" width="60px" class="rounded-circle">
+                                                    <%}%>
+
+                                                        <div>
+                                                            <h3 class="fs-5">
+                                                                <%=ponds[i].name%>
+                                                            </h3>
+                                                            <p class="fs-5 ">
+                                                                <%=ponds[i].typePond%>
+                                                            </p>
+                                                        </div>
+                                                        <hr>
+                                                        <div>
+                                                            <h3 class="fs-6">Propiedades:</h3>
+                                                            <p class="fs-7">
+                                                                Material:
+                                                                <%=ponds[i].features.material%>
+                                                            </p>
+                                                            <p class="fs-7">
+                                                                Área:
+                                                                <%=ponds[i].features.area%> (m)
+                                                            </p>
+                                                            <p class="fs-7">
+                                                                Profundidad:
+                                                                <%=ponds[i].features.depth%> (m2)
+                                                            </p>
+
+                                                            <p class="fs-7">
+                                                                Volúmen:
+                                                                <%=ponds[i].features.vol%> (m3)
+                                                            </p>
+                                                        </div>
+
+                                                        <!-- Botones de acción -->
+                                                        <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                            <a href="" class="m-1"><button type="button" class="btn btn-primary">Perfil</button></a>
+                                                            <a href="#" class="m-1"><button type="button" class="btn btn-primary">(+) Control</button></a>
+                                                            <a href="#" class="m-1"><button type="button" class="btn btn-primary">Editar</button></a>
+                                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+
+                        </div>
+
+
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
+</body>
+
+</html>

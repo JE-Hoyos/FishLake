@@ -1,0 +1,46 @@
+<div class="p-2">
+    <!-- Estanque de reproductores -->
+    <div class="card p-2">
+        <h4 class="fs-6">2. Nueva gestión de incubadora</h4>
+        <label for="input" class="col-form-label">Seleccione el estanque de inducción</label>
+        <select class="form-select" aria-label="Default select" name="pond">
+        <option selected="">Seleccione una opción</option>
+        <%try{%>
+        <% if (ponds){%>
+        <% for( i=0; i<ponds.length; i++){%>
+            <% if (ponds[i].typePond == 'Incubadora'){%>
+        <option value="<%=ponds[i]._id%>"><%=ponds[i].name%></option>
+        <%}%>
+        <%}%>
+        <%}%>
+        <%}catch(e){%>
+            <option selected="">No cuenta con estanques</option>
+            <%}%>
+    </select>
+        <div class="mb-2">
+            <div>
+                <label for="" class="col-form-label">Fecha de captura de reproductores</label>
+            </div>
+            <div>
+                <input type="date" class="form-control" id="" , name="ovoDate">
+            </div>
+        </div>
+
+        <div>
+            <label for="">Litros de huevos incubados:</label>
+            <input class="form-control" type="number" name="initialEggs">
+        </div>
+
+        <div>
+            <label for="">Fertilidad (%):</label>
+            <input class="form-control" type="number" name="fertileEggs">
+        </div>
+
+        <div>
+            <label for="">Cantidad de larvas eclosionadas:</label>
+            <input class="form-control" type="number" name="hatchedEggs">
+        </div>
+
+        <input type="hidden" class="form-control" name="idBatche" value="<%=batche._id%>">
+    </div>
+</div>

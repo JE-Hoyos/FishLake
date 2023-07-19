@@ -1,0 +1,134 @@
+<!-- Sección de inducción -->
+<div class="row">
+
+    <div class="text-center">
+        <h1 class="fs-5">1.2. Inducción de reproductores</h1>
+        <img src="/Icons/fish2.png" width="80px" class=".align-self-center">
+    </div>
+
+
+    <div class="card mt-2">
+        <div class="row">
+            <!-- Boton -->
+            <div class="col p-2 mt-2 d-flex flex-row-reverse">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#IndModal">(+)Estanque de reproducción</button>
+            </div>
+        </div>
+
+        <!-- renderización de cards -->
+
+        <div class="row align-content-center">
+            <div class="d-flex align-content-center flex-wrap">
+                <%for(var i=0; i<batche.reproduction.spawnerponds.length; i++){%>
+
+                    <div class="card text-center m-1">
+                        <div class="d-inline-block p-2 ">
+
+                            <p class=" ">
+                                <span class="fw-bolder "> Estanque:</span>
+                                <%=batche.reproduction.spawnerponds[i].idPond.name%>
+                            </p>
+
+                            <p class="">
+                                <%= batche.reproduction.spawnerponds[i].date.getDate()%> /
+                                    <%= batche.reproduction.spawnerponds[i].date.getMonth()%> /
+                                        <%= batche.reproduction.spawnerponds[i].date.getFullYear()%>
+                            </p>
+                            <hr>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <p class="p-0">
+                                        <span class="fw-bolder "> Hembras inducidas:</span>
+                                        <%=batche.reproduction.spawnerponds[i].nFemales%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Machos inducidos:</span>
+                                        <%=batche.reproduction.spawnerponds[i].nMales%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Peso de las hembras:</span>
+                                        <%=batche.reproduction.spawnerponds[i].weightFemales%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Peso de los machos:</span>
+                                        <%=batche.reproduction.spawnerponds[i].weightMales%>
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Hormona usada:</span>
+                                        <%=batche.reproduction.spawnerponds[i].hormone.typeHormone%>
+                                    </p>
+                                    <p>
+                                        <span class="fw-bolder "> Cantidad:</span>
+                                        <%=batche.reproduction.spawnerponds[i].hormone.amountHorome%>
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Litros de ovas:</span>
+                                        <%=batche.reproduction.spawnerponds[i].Eggs.litersEggs%>
+                                    </p>
+                                    <p>
+                                        <span class="fw-bolder "> Cantidad estimada:</span>
+                                        <%=batche.reproduction.spawnerponds[i].Eggs.litersEggs%>
+                                    </p>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div>
+                                <form action="/remove/BroodstockInductionRemove" method="post">
+                                    <input type="text" hidden="true" name="idBatche" value="<%=batche._id%>">
+                                    <input type="text" hidden="true" name="idspawnerponds" value="<%=batche.reproduction.spawnerponds[i]._id %>">
+                                    <input type="text" hidden="true" name="index" value="<%=i%>">
+
+                                    <div>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+            </div>
+        </div>
+        <!--  -->
+
+
+    </div>
+
+
+
+    <div class="modal fade" id="IndModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nueva inducción de reproductores</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/edit/BroodstockInductionBatche" method="post">
+                        <%-include('../../Forms/broodstockReprodForm')%>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

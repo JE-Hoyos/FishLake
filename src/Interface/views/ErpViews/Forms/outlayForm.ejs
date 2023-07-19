@@ -1,0 +1,114 @@
+<div>
+    <!-- fecha del egreso -->
+    <div>
+        <div>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Fecha de egreso</label>
+        </div>
+        <div>
+            <input type="date" class="form-control" id="">
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!--  Clase de egreso -->
+    <h2 class="fs-6">Caracterización del egreso</h2>
+    <div>
+        <label for="input" class="col-sm-2 col-form-label">Clase de egreso</label>
+        <select class="form-select" aria-label="Default select" id="typeOutlay" , required="true">
+            <option value="0">Seleccione una opción</option>
+            <option value="5">5-GASTO</option>
+            <option value="7">7-COSTO</option>
+        </select>
+    </div>
+
+    <!-- select Costos -->
+    <div id="costAccount" class="mt-2">
+        <label for="input" class="">Subcuenta del costo:</label>
+        <select class="form-select" aria-label="Default select" id="" required="true">
+            <% for(var i=0; i<PUC.cost.length; i++){%>
+                <option value="<%=PUC.cost[i].subcuenta%>"><%=PUC.cost[i].subcuenta +'-'+ PUC.cost[i].nombreSubcuenta%></option>
+                <%}%>
+        </select>
+    </div>
+    <!-- select Gastos -->
+    <div id="expensesAccount" class="mt-2">
+        <label for="input" class="">Subcuenta del gasto:</label>
+        <input class="form-control" list="datalistOptions" id="" placeholder="Type to search...">
+        <datalist id="datalistOptions" placeholder="Consulte una opción">
+                <% for(var i=0; i<PUC.expenses.length; i++){%>
+                    <option value="<%=PUC.expenses[i].subcuenta%>"><%=PUC.expenses[i].subcuenta +'-'+ PUC.expenses[i].nombreSubcuenta%></option>
+                <%}%> 
+        </datalist>
+
+        <div class="mt-2">
+            <p>Consulte la guia del Plan Único de Cuentas (PUC) <a href="https://puc.com.co/cuentas/clase/5"> Aquí</a></p>
+        </div>
+    </div>
+
+    <!-- datos -->
+    <hr>
+    <h2 class="fs-6">Informacion del egreso</h2>
+
+    <div>
+        <label for="">Valor($):</label>
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-text">.00</span>
+        </div>
+    </div>
+
+    <!-- Cantidad -->
+    <div>
+        <label for="">Cantidad:</label>
+        <input class="form-control" type="number">
+    </div>
+
+    <!-- Unidades de medida -->
+
+    <div class="mb-4">
+        <label for="">Unidad de medida:</label>
+        <select class="form-select" aria-label="Default select">
+            <option selected="">Selecione una medida</option>
+            <option value="">Unidades</option>
+            <option value="">Toneladas</option>
+            <option value="">Kilogramos</option>
+            <option value="">Gramos</option>
+            <option value="">Miligramos</option>
+            <option value="">Galones</option>
+            <option value="">Litros</option>
+            <option value="">Mililitros</option>
+            <option value="">Metros</option>
+            <option value="">Unidades</option>
+       </select>
+    </div>
+    <!-- Description -->
+    <div class="form-floating mb-4">
+        <label for="floatingTextarea">Descripción:</label>
+        <textarea class="form-control" placeholder="" id="floatingTextarea" style="height: 100px"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+
+</div>
+<script>
+    typeAccount = document.getElementById('typeOutlay');
+    costSubaccount = document.getElementById('costAccount');
+    expenseSubaccount = document.getElementById('expensesAccount');
+
+    costSubaccount.style.display = "none";
+    expenseSubaccount.style.display = "none";
+
+    typeAccount.addEventListener("change", function() {
+        if (typeAccount.value == "5") {
+            expenseSubaccount.style.display = "block";
+            costSubaccount.style.display = "none";
+        }
+        if (typeAccount.value == "7") {
+            costSubaccount.style.display = "block";
+            expenseSubaccount.style.display = "none";
+        }
+    });
+</script>

@@ -3,28 +3,37 @@ const { Schema } = mongoose;
 
 const ProductiveBatcheSchema = new Schema({
     //Información general del lote
-    idSystem: { type: String, required: true },
+    idSystem: { type: String, required: true }, //*por defecto
 
     creation: {
-        date: { type: Date, required: true },
-        userId: { type: Date, required: true }
+        reprodDate: { type: Date, required: true }, //*por defecto
+        userId: { type: String, required: true }, //*por defecto
+        createDate: { type: Date, required: true, default: () => Date.now() }
     },
 
-    properties: {
-        typePB: { type: String, required: true }, //puede sobrar
-        specie: { type: String, required: true },
-    },
+    specie: { type: String, required: true },
 
-    //1. Etapa de reproducción
+    notes: { type: String },
+
+    //1. Etapa de reproducción. Etapa de inicio del proceso**
     reproduction: {
-        date: { type: Date },
-        pondsCollections: [{
-            idPond: { type: String },
+        broodstockponds: [{
+            date: { type: Date },
+            idPond: { type: Schema.Types.ObjectId, ref: "Pond" },
+            nFemales: { type: Number },
+            nMales: { type: Number },
+            nFemalesFer: { type: Number },
+            nMalesFer: { type: Number },
+        }],
+        spawnerponds: [{
+            date: { type: Date },
+            idPond: { type: String, ref: "Pond" },
             nFemales: {},
             nMales: {},
             weightFemales: {},
             weightMales: {},
             hormone: {
+                idOutlay: { type: String, ref: "Outlay" },
                 typeHormone: {},
                 amountHorome: {},
                 syringes: {},
@@ -39,12 +48,11 @@ const ProductiveBatcheSchema = new Schema({
     },
 
     //2. Etapa de ovicultura
-    oviculture: {
-
-        date: { type: Date },
+    ovoculture: {
         pondsCollections: [{
-            idPond: { type: String },
-            hatchedEggs: {},
+            date: { type: Date },
+            idPond: { type: String, ref: "Pond" },
+            initialEggs: {},
             fertileEggs: {},
             hatchedEggs: {},
             laborForce: {},
@@ -53,34 +61,46 @@ const ProductiveBatcheSchema = new Schema({
     },
     //3. Etapa de larvicultura
     larviculture: {
-
-        date: { type: Date },
-
         pondsCollections: [{
+            idPond: { type: String, ref: "Pond" },
+            date: { type: Date },
             initialLarvae: {},
             postlarvae: {},
-            liveFood: {},
+            liveFood: {
+                idOutlay: { type: String, ref: "Outlay" }
+
+            },
             laborForce: {},
         }]
     },
 
     //4. Etapa de alevinaje
     fingerlings: {
-        date: { type: Date },
 
         pondsCollections: [{
+            date: { type: Date },
+            idPond: { type: String, ref: "Pond" },
             initialFingerlings: {},
             finalFingerlings: {},
-            cal: {},
-            food: {},
-            fertilizer: {},
-            laborForce: {},
+            cal: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
+            food: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
+            fertilizer: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
+            laborForce: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
         }]
     },
 
     //5. Embalaje
     packaging: {
         packingCollections: [{
+            idPond: { type: String, ref: "Pond" },
             date: { type: Date },
             initialFingerlings: {},
             packedFingerlings: {

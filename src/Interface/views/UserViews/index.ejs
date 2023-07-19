@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishLake</title>
+    <link rel="shortcut icon" href="./icons/pond.png">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Validaciones de mensaje -->
+        <% if (signInErr == 'usuario no existe'){%>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                ! El usuario no se encuentra registrado, valide la información e intente nuevamente o puede registrar un usuario maestro, si es administrador de un sistema productivo. Si es empleado, remitase con sus jefes inmediatos para gestionar un usuario.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <a href="/FormNewUser">Crear un usuario maestro (para administradores principales)</a>
+            </div>
+            <%}%>
+
+                <% if (signInErr == 'contraseña invalida'){%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        ¡La contraseña es incorrecta, valide la información e intente nuevamente¡
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <a href="/">Iniciar sesión</a>
+                    </div>
+                    <%}%>
+
+                        <!-- welcom message -->
+                        <div class="row mb-3 mt-2">
+                            <h1>Bienvenidos a FishLake</21>
+                                <h2 class="text-center">Esto apenas empieza</h2>
+                        </div>
+
+
+                        <div class="row">
+                            <!-- Presentation -->
+                            <div class="col-lg-7 mt-4">
+                                <div class="text-center">
+                                    <h3>Una plataforma diseñada para la producción de peces nativos de Colombia</h3>
+                                    <div>
+                                        <img height="300" src="./icons/data-lake.png" alt="">
+                                    </div>
+                                    <p>¡Gestiona la información de tu sistema piscícola de forma eficiente, en una plataforma sencilla e intuitiva! </p>
+                                </div>
+                            </div>
+                            <!-- inicio de sesión -->
+                            <div class="col">
+                                <div class="card m-3 p-5">
+                                    <h3 lass="text-center"> Inicia session o crea tu nuevo usuario</h3>
+                                    <form action="/SignIn" method="post">
+
+                                        <div class=" mb-3">
+                                            <label for="inputEmail3" class="col-form-label">Correo electrónico</label>
+                                            <div class="col">
+                                                <input type="email" class="form-control" id="inputEmail3" name="email">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="inputPassword3" class="col-form-label">Contraseña</label>
+                                            <div class="col">
+                                                <input type="password" class="form-control" id="" name="password">
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                    </form>
+
+                                    <div class="mt-2">
+                                        <a href="/FormNewUser">Crear un usuario Maestro nuevo</a>
+                                        <p>Si eres empleado de un sistema piscícola y no tienes usuario, contactate con tu empleador para adquirir tu cuenta</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
+</body>
+
+</html>

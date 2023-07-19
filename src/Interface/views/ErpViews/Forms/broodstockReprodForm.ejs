@@ -1,0 +1,81 @@
+<div class="p-2">
+    <!-- Estanque de reproductores -->
+    <div class="card p-2">
+        <h4 class="fs-6">1.1.Estanques de inducción</h4>
+        <label for="input" class="col-form-label">Seleccione el estanque de inducción</label>
+        <select class="form-select" aria-label="Default select" name="pond">
+        <option selected="">Seleccione una opción</option>
+        <%try{%>
+        <% if (ponds){%>
+        <% for( i=0; i<ponds.length; i++){%>
+            <% if (ponds[i].typePond == 'Desove' || ponds[i].typePond == 'General'){%>
+        <option value="<%=ponds[i]._id%>"><%=ponds[i].name%></option>
+        <%}%>
+        <%}%>
+        <%}%>
+        <%}catch(e){%>
+            <option selected="">No cuenta con estanques</option>
+            <%}%>
+    </select>
+        <a href="/CallPonds"> Visitar estanques</a>
+
+        <!-- fecha de la captura -->
+        <div class="mb-2">
+            <div>
+                <label for="" class="col-form-label">Fecha de inducción</label>
+            </div>
+            <div>
+                <input type="date" class="form-control" id="" , name="indDate">
+            </div>
+        </div>
+        <!-- Reproductores -->
+        <div class="row">
+            <div class="col-6">
+                <label for="" class="">Número de hembras:</label>
+                <input type="Number" class="form-control" name="nFemales" placeholder="">
+            </div>
+            <div class="col">
+                <label for="" class="">Peso total de las hembras (kg):</label>
+                <input type="Number" class="form-control" name="weightFemales" placeholder="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="" class="">Número de machos:</label>
+                <input type="Number" class="form-control" name="nMales" placeholder="">
+            </div>
+
+            <div class="col">
+                <label for="" class="">Peso total de los machos (kg):</label>
+                <input type="Number" class="form-control" name="weightMales" placeholder="">
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <label for="" class="">Huevos producidos (L):</label>
+                <input type="Number" class="form-control" name="eggs" placeholder="">
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col">
+                <label for="" class="">Nombre de hormona usada:</label>
+                <input type="text" class="form-control" name="hormoneName" placeholder="">
+            </div>
+            <div class="col">
+                <label for="" class="">Hormona usada (mg):</label>
+                <input type="Number" class="form-control" name="hormoneAmount" placeholder="">
+            </div>
+            <div class="col">
+                <label for="" class="">Cantidad de Geringas usadas:</label>
+                <input type="Number" class="form-control" name="syringes" placeholder="">
+            </div>
+        </div>
+
+        <input type="hidden" class="form-control" name="idBatche" value="<%=batche._id%>">
+    </div>
+</div>

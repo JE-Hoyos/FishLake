@@ -1,0 +1,116 @@
+<!-- ********************** -->
+<!-- Información de reproducción -->
+<div class="row">
+    <div class="text-center">
+        <h1 class="fs-5">1.1. Captura de reproductores</h1>
+        <img src="/Icons/fish2.png" width="80px" class=".align-self-center">
+    </div>
+    <div class="card">
+
+        <div class="row">
+            <!-- Boton -->
+            <div class="col p-2 mt-2 d-flex flex-row-reverse">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#RepModal">(+)Estanque</button>
+            </div>
+        </div>
+
+        <div class="row align-content-center">
+            <div class="d-flex align-content-center flex-wrap">
+                <%for(var i=0; i<batche.reproduction.broodstockponds.length; i++){%>
+
+                    <div class="card text-center m-1">
+                        <div class="d-inline-block p-2 ">
+
+                            <p class=" ">
+                                <span class="fw-bolder "> Estanque:</span>
+                                <%=batche.reproduction.broodstockponds[i].idPond.name%>
+                            </p>
+
+                            <p class="">
+                                <%= batche.reproduction.broodstockponds[i].date.getDate()%> /
+                                    <%= batche.reproduction.broodstockponds[i].date.getMonth()%> /
+                                        <%= batche.reproduction.broodstockponds[i].date.getFullYear()%>
+                            </p>
+                            <hr>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <p class="p-0">
+                                        <span class="fw-bolder "> Hembras capturadas:</span>
+                                        <%=batche.reproduction.broodstockponds[i].nFemales%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Machos capturados:</span>
+                                        <%=batche.reproduction.broodstockponds[i].nMales%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Hembras fertiles:</span>
+                                        <%=batche.reproduction.broodstockponds[i].nFemalesFer%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Machos fertiles:</span>
+                                        <%=batche.reproduction.broodstockponds[i].nMalesFer%>
+                                    </p>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div>
+                                <p>
+                                    <span class="fw-bolder "> (%) Fertilidad hembras:</span>
+                                    <%=(((batche.reproduction.broodstockponds[i].nFemalesFer / batche.reproduction.broodstockponds[i].nFemales)*100) * (10 ^ 2)) / (10 ^ 2)%>
+                                </p>
+
+                                <p>
+                                    <span class="fw-bolder "> (%) Fertilidad machos:</span>
+                                    <%=Math.round(((batche.reproduction.broodstockponds[i].nMalesFer / batche.reproduction.broodstockponds[i].nMales)* 100)* (10 ^ 2)) / (10 ^ 2)%>
+                                </p>
+                            </div>
+                            <hr>
+                            <div>
+                                <form action="/remove/BroodstockFishingBatche" method="post">
+                                    <input type="text" hidden="true" name="idBatche" value="<%=batche._id%>">
+                                    <input type="text" hidden="true" name="idBroodstockponds" value="<%=batche.reproduction.broodstockponds[i]._id%>">
+                                    <input type="text" hidden="true" name="index" value="<%=i%>">
+                                    <div>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+            </div>
+        </div>
+
+        <!-- Modal formulario nuevo estanque -->
+        <div class="modal fade" id="RepModal" tabindex="-1 " aria-labelledby="exampleModalLabel" aria-hidden="true ">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable ">
+                <div class="modal-content ">
+                    <div class="modal-header ">
+                        <h5 class="modal-title text-center" id="">Nuevo Estanque o Incubadora</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close "></button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="card p-2 m-2 ">
+                            <!-- -->
+                            <form action="/edit/BroodstockFishingBatche" method="post">
+                                <%-include('../../Forms/broodstockFishingForm')%>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">Cerrar</button>
+                        <button type="submit " class="btn btn-primary ">Guardar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
