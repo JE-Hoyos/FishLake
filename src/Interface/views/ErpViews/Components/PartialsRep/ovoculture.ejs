@@ -1,0 +1,104 @@
+<!-- sección de ovicultura -->
+<div class="row">
+
+    <div class="text-center">
+        <h1 class="fs-5">2.1. Ovicultura</h1>
+        <img src="/Icons/eggs.png" width="80px" class=".align-self-center">
+    </div>
+
+
+    <div class="card mt-2">
+        <div class="row">
+            <!-- Boton -->
+            <div class="col p-2 mt-2 d-flex flex-row-reverse">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#OvoModal">(+) Incubadora</button>
+            </div>
+        </div>
+        <!-- renderización de cards -->
+
+        <div class="row align-content-center">
+            <div class="d-flex align-content-center flex-wrap">
+                <%for(var i=0; i<batche.ovoculture.pondsCollections.length; i++){%>
+
+                    <div class="card text-center m-1">
+                        <div class="d-inline-block">
+
+                            <p class=" ">
+                                <span class="fw-bolder "> Incubadora:</span>
+                                <%=batche.ovoculture.pondsCollections[i].idPond.name%>
+                            </p>
+
+                            <p class="">
+                                <%=batche.ovoculture.pondsCollections[i].date.getDate()%> /
+                                    <%=batche.ovoculture.pondsCollections[i].date.getMonth()%> /
+                                        <%=batche.ovoculture.pondsCollections[i].date.getFullYear()%>
+                            </p>
+                            <hr>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <p class="p-0">
+                                        <span class="fw-bolder "> Litros de ovas incubadas:</span>
+                                        <%=batche.ovoculture.pondsCollections[i].initialEggs%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder ">Fertilidad de ovas (%):</span>
+                                        <%=batche.ovoculture.pondsCollections[i].fertileEggs%>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span class="fw-bolder "> Cantidad de larvas eclosionadas:</span>
+                                        <%=batche.ovoculture.pondsCollections[i].hatchedEggs%>
+                                    </p>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div>
+                                <form action="/remove/ovoculture" method="post">
+                                    <input type="text" hidden="true" name="idBatche" value="<%=batche._id%>">
+                                    <input type="text" hidden="true" name="idpond" value="<%=batche.ovoculture.pondsCollections[i]._id %>">
+                                    <input type="text" hidden="true" name="index" value="<%=i%>">
+
+                                    <div>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+            </div>
+        </div>
+        <!--  -->
+
+
+    </div>
+
+
+    <!-- Modal formulario nueva incubadora -->
+    <div class="modal fade" id="OvoModal" tabindex="-1 " aria-labelledby="exampleModalLabel" aria-hidden="true ">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable ">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-center" id="">Nueva Incubadora</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close "></button>
+                </div>
+                <div class="modal-body ">
+
+                    <!-- -->
+                    <form action="/edit/ovoculture" method="post">
+                        <%-include('../../Forms/ovocultureForm.ejs')%>
+
+
+                </div>
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-secondary" data-bs-dismiss="modal ">Cerrar</button>
+                    <button type="submit " class="btn btn-primary">Guardar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>

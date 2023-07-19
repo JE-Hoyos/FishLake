@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 //Modelo de actividades
 const activitiesSchema = new Schema({
-    idSystem: { type: String, required: true },
+    idSystem: { type: String, required: true, ref: "System" },
     idUser: {},
     date: { type: Date, required: true },
     typeActivitie: { type: String },

@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const incomeSchema = new Schema({
     date: { type: Date, required: true },
-    idSystem: { type: String, required: true },
-    idCustomer: { type: String },
+    idSystem: { type: String, required: true, ref: "System" },
+    idCustomer: { type: String, ref: "Customer" },
     features: {
         amount: {},
         price: {},

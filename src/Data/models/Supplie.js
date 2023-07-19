@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const suppliesSchema = new Schema({
     date: { type: Date, required: true },
-    idSystem: { type: String, required: true },
-    idOutlay: { type: String, required: true },
+    idSystem: { type: String, required: true, ref: "System" },
+    idOutlay: { type: String, required: true, ref: "Outlay" },
     input: {},
     outputs: [{}],
     balance: {},

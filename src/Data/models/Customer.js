@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const customerSchema = new Schema({
     date: { type: Date, required: true },
-    idSystem: { type: String, required: true },
+    idSystem: { type: String, required: true, ref: "System" },
     features: {
         custmerType: {},
         identification: {},

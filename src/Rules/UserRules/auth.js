@@ -27,7 +27,17 @@ passport.use('local-signup', new localStrategy({
     passReqToCallback: true
 
 }, async(req, email, password, done) => {
-    const { firstname, lastname, gender, position, professional, telphone, passone, passconfirm } = req.body
+
+    const {
+        firstname,
+        lastname,
+        gender,
+        position,
+        professional,
+        telphone,
+        passone,
+        passconfirm
+    } = req.body
 
     //validar existencia de usuario
     validUser = await User.findOne({ email: email })
@@ -102,7 +112,6 @@ const createSystem = async(req, res) => {
     //capturar datos de formulario
     const { nameSystem, country, departament, lon, lat, descript } = req.body;
     const userId = req.user._id;
-
     //Instanciar el objeto system
     const system = new System({
         idUserMaster: userId,

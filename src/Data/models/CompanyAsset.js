@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 //Modelo de activos
 const companyAssetSchema = new Schema({
     date: { type: Date, required: true },
-    idSystem: { type: String, required: true },
+    idSystem: { type: String, required: true, ref: "System" },
     typeAsset: { type: String, required: true },
     features: {
         reference: {},

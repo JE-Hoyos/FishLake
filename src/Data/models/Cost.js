@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const CostSchema = new Schema({
     //Información general del lote
-    idSystem: { type: String, required: true },
+    idSystem: { type: String, required: true, ref: "System" },
     idProductiveBatche: { type: String, required: true },
     date: { type: Date, required: true },
 

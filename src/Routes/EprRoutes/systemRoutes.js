@@ -8,7 +8,7 @@ const { SystemRules } = require('../../Rules/ErpRules/systemRules');
 const { ColabsRules } = require('../../Rules/ErpRules/colabRules');
 const { PondsRules } = require('../../Rules/ErpRules/pondRules');
 const { BatchesRules } = require('../../Rules/ErpRules/batchesRules');
-
+const { OutlaysRules } = require('../../Rules/ErpRules/outlaysRules')
 
 //**sistema */
 // visitar perfil de systema
@@ -35,6 +35,24 @@ router.post('/New_pond', isAuthenticated, permissions.ponds, PondsRules.createNe
 router.get('/callBatches', isAuthenticated, BatchesRules.callBatches);
 router.post('/newBatche', isAuthenticated, BatchesRules.createNewBatche);
 router.get('/batcheProfile/:id', isAuthenticated, BatchesRules.callBatcheProfile);
-router.post('/editBroodstockFishingBatche', isAuthenticated, BatchesRules.broodstockFishingEdit);
+
+//**Etapas*/
+//1.1. Captura y selección
+router.post('/edit/BroodstockFishingBatche', isAuthenticated, BatchesRules.broodstockFishingEdit);
+router.post('/remove/BroodstockFishingBatche', isAuthenticated, BatchesRules.broodstockFishingRemove);
+//1.2. Inducción
+router.post('/edit/BroodstockInductionBatche', isAuthenticated, BatchesRules.broodstockInductionBatche);
+router.post('/remove/BroodstockInductionRemove', isAuthenticated, BatchesRules.broodstockInductionRemove);
+//2. ovicultura
+router.post('/edit/ovoculture', isAuthenticated, BatchesRules.ovocultureEdit);
+router.post('/remove/ovoculture', isAuthenticated, BatchesRules.ovocultureRemove);
+//3. larvicultura
+router.post('/edit/larviculture', isAuthenticated, BatchesRules.larvicultureEdit);
+router.post('/remove/larviculture', isAuthenticated, BatchesRules.larvicultureRemove);
+
+
+
+//**Egresos*/
+router.get('/call/outlay', isAuthenticated, OutlaysRules.callOutlay);
 
 module.exports = router;

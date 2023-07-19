@@ -26,12 +26,14 @@ const ProductiveBatcheSchema = new Schema({
             nMalesFer: { type: Number },
         }],
         spawnerponds: [{
-            idPond: { type: String },
+            date: { type: Date },
+            idPond: { type: String, ref: "Pond" },
             nFemales: {},
             nMales: {},
             weightFemales: {},
             weightMales: {},
             hormone: {
+                idOutlay: { type: String, ref: "Outlay" },
                 typeHormone: {},
                 amountHorome: {},
                 syringes: {},
@@ -46,11 +48,11 @@ const ProductiveBatcheSchema = new Schema({
     },
 
     //2. Etapa de ovicultura
-    oviculture: {
-        date: { type: Date },
+    ovoculture: {
         pondsCollections: [{
-            idPond: { type: String },
-            hatchedEggs: {},
+            date: { type: Date },
+            idPond: { type: String, ref: "Pond" },
+            initialEggs: {},
             fertileEggs: {},
             hatchedEggs: {},
             laborForce: {},
@@ -59,34 +61,46 @@ const ProductiveBatcheSchema = new Schema({
     },
     //3. Etapa de larvicultura
     larviculture: {
-
-        date: { type: Date },
-
         pondsCollections: [{
+            idPond: { type: String, ref: "Pond" },
+            date: { type: Date },
             initialLarvae: {},
             postlarvae: {},
-            liveFood: {},
+            liveFood: {
+                idOutlay: { type: String, ref: "Outlay" }
+
+            },
             laborForce: {},
         }]
     },
 
     //4. Etapa de alevinaje
     fingerlings: {
-        date: { type: Date },
 
         pondsCollections: [{
+            date: { type: Date },
+            idPond: { type: String, ref: "Pond" },
             initialFingerlings: {},
             finalFingerlings: {},
-            cal: {},
-            food: {},
-            fertilizer: {},
-            laborForce: {},
+            cal: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
+            food: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
+            fertilizer: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
+            laborForce: {
+                idOutlay: { type: String, ref: "Outlay" }
+            },
         }]
     },
 
     //5. Embalaje
     packaging: {
         packingCollections: [{
+            idPond: { type: String, ref: "Pond" },
             date: { type: Date },
             initialFingerlings: {},
             packedFingerlings: {

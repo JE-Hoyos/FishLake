@@ -16,7 +16,7 @@ const systemSchema = new Schema({
         nameCostCenters: { type: String },
         descript: { type: String }
     }],
-    settings: {},
+    outlaySettings: [{}],
     species: [{
 
     }],

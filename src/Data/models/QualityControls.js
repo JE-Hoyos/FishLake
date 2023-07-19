@@ -6,7 +6,7 @@ const qualityControlSchema = new Schema({
     createDate: { type: Date, required: true },
     controlDate: { type: Date, required: true },
     typeControl: {},
-    pond: {},
+    idpond: { required: true, ref: "Pond" },
     unit: {},
     value: {},
 

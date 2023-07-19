@@ -63,119 +63,156 @@
                                             <hr class="m-1">
 
                                             <!-- opciones del sistema -->
-                                            <div class="card">
-                                                <h3 class="fs-6 m-3 mb-1">Especies trabajadas:</h3>
-                                                <div class="">
-                                                    <ul>
-                                                        <%for(var i=0; i<system.species.length; i++){%>
-                                                            <li>
-                                                                <%=system.species[i].comunSpecie%>
-                                                            </li>
-                                                            <%}%>
-                                                    </ul>
+                                            <!-- Acordion -->
+                                            <div class="accordion" id="">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingOne">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="" aria-controls="collapseOne">
+                                                         Especies trabajadas
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionBasic">
+                                                        <div class="accordion-body">
+
+                                                            <div class="card">
+                                                                <h3 class="fs-6 m-3 mb-1">Especies trabajadas:</h3>
+                                                                <div class="">
+                                                                    <ul>
+                                                                        <%for(var i=0; i<system.species.length; i++){%>
+                                                                            <li>
+                                                                                <%=system.species[i].comunSpecie%>
+                                                                            </li>
+                                                                            <%}%>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <%if(user.userType == 'Master'){%>
+                                                                    <button class="btn btn-success m-3 mt-1" data-bs-toggle="modal" data-bs-target="#specieModal">(+)Especie</button>
+
+                                                                    <!-- Modal formulario nueva especie-->
+                                                                    <div class="modal fade" id="specieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title text-center" id="exampleModalLabel">Nueva Especie</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="card p-2 m-2">
+
+                                                                                        <!-- especieForm -->
+                                                                                        <form action="/AddSpecie" method="post">
+                                                                                            <div>
+                                                                                                <label for="formControlInput" class="form-label">Nombre común:</label>
+                                                                                                <input type="text" class="form-control" id="" placeholder="" name="comunSpecie">
+                                                                                            </div>
+
+                                                                                            <div>
+                                                                                                <label for="formControlInput" class="form-label">Nombre cientifico:</label>
+                                                                                                <input type="text" class="form-control" id="" placeholder="" name="scientSpecie">
+                                                                                            </div>
+
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                                            </div>
+
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%}%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <%if(user.userType == 'Master'){%>
-                                                    <button class="btn btn-success m-3 mt-1" data-bs-toggle="modal" data-bs-target="#specieModal">(+)Especie</button>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingTwo">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                      Centros de costos
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionBasic">
+                                                        <div class="accordion-body">
 
-                                                    <!-- Modal formulario nueva especie-->
-                                                    <div class="modal fade" id="specieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title text-center" id="exampleModalLabel">Nueva Especie</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <div class="card mt-1">
+                                                                <h3 class="fs-6 m-3 mb-1">Centros de costos:</h3>
+                                                                <div class="m-3">
+                                                                    <ul>
+                                                                        <%for(var i=0; i<system.costCenters.length; i++){%>
+                                                                            <li>
+                                                                                <%=system.costCenters[i].nameCostCenters%>
+                                                                            </li>
+                                                                            <%}%>
+                                                                    </ul>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <div class="card p-2 m-2">
+                                                                <%if(user.userType == 'Master'){%>
+                                                                    <button class="btn btn-success m-3 mt-1" data-bs-toggle="modal" data-bs-target="#centerCostModal">(+)Centro de costo</button>
 
-                                                                        <!-- especieForm -->
-                                                                        <form action="/AddSpecie" method="post">
-                                                                            <div>
-                                                                                <label for="formControlInput" class="form-label">Nombre común:</label>
-                                                                                <input type="text" class="form-control" id="" placeholder="" name="comunSpecie">
+                                                                    <!-- Modal formulario nueva especie-->
+                                                                    <div class="modal fade" id="centerCostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title text-center" id="">Nuevo centro de costos</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="card p-2 m-2">
+
+                                                                                        <!-- especieForm -->
+                                                                                        <form action="/AddCostCenter" method="post">
+                                                                                            <div>
+                                                                                                <label for="formControlInput" class="form-label">Nombre del centro:</label>
+                                                                                                <input type="text" class="form-control" id="" placeholder="" name="nameCostCenters">
+                                                                                            </div>
+
+                                                                                            <div>
+                                                                                                <label for="formControlInput" class="form-label">Descripción corta:</label>
+                                                                                                <input type="text" class="form-control" id="" placeholder="" name="descript">
+                                                                                            </div>
+
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                                            </div>
+
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
-
-                                                                            <div>
-                                                                                <label for="formControlInput" class="form-label">Nombre cientifico:</label>
-                                                                                <input type="text" class="form-control" id="" placeholder="" name="scientSpecie">
-                                                                            </div>
-
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                                                            </div>
-
-                                                                        </form>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                    <%}%>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingThree">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                      Unidades de asignación
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionBasic">
+                                                        <div class="accordion-body">
+
+                                                            <p>Estamos trabajando</p>
 
                                                         </div>
                                                     </div>
-                                                    <%}%>
-                                            </div>
-                                            <!-- centros de costos -->
-                                            <div class="card mt-1">
-                                                <h3 class="fs-6 m-3 mb-1">Centros de costos:</h3>
-                                                <div class="m-3">
-                                                    <ul>
-                                                        <%for(var i=0; i<system.costCenters.length; i++){%>
-                                                            <li>
-                                                                <%=system.costCenters[i].nameCostCenters%>
-                                                            </li>
-                                                            <%}%>
-                                                    </ul>
                                                 </div>
-                                                <%if(user.userType == 'Master'){%>
-                                                    <button class="btn btn-success m-3 mt-1" data-bs-toggle="modal" data-bs-target="#centerCostModal">(+)Centro de costo</button>
-
-                                                    <!-- Modal formulario nueva especie-->
-                                                    <div class="modal fade" id="centerCostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title text-center" id="">Nuevo centro de costos</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="card p-2 m-2">
-
-                                                                        <!-- especieForm -->
-                                                                        <form action="/AddCostCenter" method="post">
-                                                                            <div>
-                                                                                <label for="formControlInput" class="form-label">Nombre del centro:</label>
-                                                                                <input type="text" class="form-control" id="" placeholder="" name="nameCostCenters">
-                                                                            </div>
-
-                                                                            <div>
-                                                                                <label for="formControlInput" class="form-label">Descripción corta:</label>
-                                                                                <input type="text" class="form-control" id="" placeholder="" name="descript">
-                                                                            </div>
-
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                                                            </div>
-
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-
-                                                        </div>
-
-                                                    </div>
-                                                    <%}%>
                                             </div>
                             </div>
+
                             <!-- Contenedor de tareas -->
                             <div class="col ">
                                 <div class="row">
-                                    <%-include('./partials/navigation.ejs')%>
+                                    <%-include('./Components/navigation.ejs')%>
                                 </div>
                                 <div class="row row-cols-lg-4 g-3 mt-3">
 
@@ -228,7 +265,7 @@
                                     <div class="col">
                                         <div class="container text-center">
                                             <div class="d-inline-block p-2">
-                                                <a href="#">
+                                                <a href="/call/outlay">
                                                     <div class="text-center mb-2">
                                                         <img src="./Icons/outlay.png" width="60px" alt="">
                                                     </div>

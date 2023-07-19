@@ -1,0 +1,149 @@
+<!-- sección de larviultura -->
+<div class="row">
+
+    <div class="text-center">
+        <h1 class="fs-5">3. Larvicultura</h1>
+        <img src="/Icons/fish (1).png" width="80px" class=".align-self-center">
+    </div>
+
+
+    <div class="card mt-2">
+        <div class="row">
+            <!-- Boton -->
+            <div class="col p-2 mt-2 d-flex flex-row-reverse">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#LarvModal">(+) Estanque</button>
+            </div>
+        </div>
+        <!-- renderización de cards -->
+
+        <div class="row align-content-center">
+            <div class="d-flex align-content-center flex-wrap">
+                <%for(var i=0; i<batche.larviculture.pondsCollections.length; i++){%>
+
+                    <div class="card text-center m-1">
+                        <div class="d-inline-block">
+
+                            <%-include('../Forms/larvicultureForms')%>
+
+                                <p class=" ">
+                                    <span class="fw-bolder "> Estanque:</span>
+                                    <%=batche.larviculture.pondsCollections[i].idPond.name%>
+                                </p>
+
+                                <p class="">
+                                    <%=batche.larviculture.pondsCollections[i].date.getDate()%> /
+                                        <%=batche.larviculture.pondsCollections[i].date.getMonth()%> /
+                                            <%=batche.larviculture.pondsCollections[i].date.getFullYear()%>
+                                </p>
+                                <hr>
+                                <form action="">
+
+                                    <div class="mb-2">
+                                        <div>
+                                            <label for="" class="col-form-label">Fecha de siembra</label>
+                                        </div>
+                                        <div>
+                                            <input type="date" class="form-control" id="" , name="date" value="<%=batche.larviculture.pondsCollections[i].date%>">
+                                        </div>
+                                    </div>
+
+                                    <label for="">Larvas sembradas:</label>
+                                    <input type="text" name="initialLarvae" value="<%=batche.larviculture.pondsCollections[i].initialLarvae%>">
+
+                                    <label for="">Postlarvas al final de la etapa</label>
+                                    <input type="text" name="postlarvae" value="<%=batche.larviculture.pondsCollections[i].postlarvae%>">
+
+                                    <label for="">Cantidad de alimento vivo suministrado:</label>
+                                    <input type="text" name="liveFood" value="<%=batche.larviculture.pondsCollections[i].liveFood%>">
+
+                                    <input type="text" hidden="true" name="idBatche" value="<%=batche._id%>">
+                                    <input type="text" hidden="true" name="idpond" value="<%=batche.larviculture.pondsCollections[i]._id %>">
+                                </form>
+
+
+
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <p class="p-0">
+                                            <span class="fw-bolder "> Larvas sembradas:</span>
+                                            <%=batche.larviculture.pondsCollections[i].initialLarvae%>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <span class="fw-bolder ">Postlarvas al final de la etapa:</span>
+                                            <%=batche.larviculture.pondsCollections[i].postlarvae%>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <span class="fw-bolder "> Cantidad de alimento vivo suministrado:</span>
+                                            <%=batche.larviculture.pondsCollections[i].liveFood%>
+                                        </p>
+                                    </li>
+                                </ul>
+
+
+
+
+
+
+
+                                <hr>
+                                <p>Indicadores</p>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <p class="p-0">
+                                            <span class="fw-bolder "> (%) Sobrevivencia:</span>
+                                            <%=((batche.larviculture.pondsCollections[i].initialLarvae/batche.larviculture.pondsCollections[i].postlarvae)*100)* (10 ^ 2) / (10 ^ 2)%>
+                                        </p>
+                                    </li>
+                                </ul>
+                                <hr>
+                                <div>
+                                    <form action="/remove/larviculture" method="post">
+                                        <input type="text" hidden="true" name="idBatche" value="<%=batche._id%>">
+                                        <input type="text" hidden="true" name="idpond" value="<%=batche.larviculture.pondsCollections[i]._id %>">
+                                        <input type="text" hidden="true" name="index" value="<%=i%>">
+
+                                        <div>
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                    <%}%>
+            </div>
+        </div>
+        <!--  -->
+
+
+    </div>
+
+
+    <!-- Modal formulario nueva incubadora -->
+    <div class="modal fade" id="LarvModal" tabindex="-1 " aria-labelledby="exampleModalLabel" aria-hidden="true ">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable ">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-center" id="">Nueva Incubadora</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close "></button>
+                </div>
+                <div class="modal-body ">
+
+                    <!-- -->
+                    <form action="/edit/ovoculture" method="post">
+                        <%-include('../../Forms/larvicultureForm.ejs')%>
+
+
+                </div>
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-secondary" data-bs-dismiss="modal ">Cerrar</button>
+                    <button type="submit " class="btn btn-primary">Guardar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>

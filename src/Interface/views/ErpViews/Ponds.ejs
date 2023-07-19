@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <!-- Navegación -->
         <div class="row">
-            <%-include('./partials/navigation.ejs')%>
+            <%-include('./Components/navigation.ejs')%>
         </div>
         <!-- Validaciones de mensaje -->
         <% if (successMessage =='success'){%>
@@ -57,7 +57,7 @@
                                         <div class="card p-2 m-2">
                                             <!-- colabForm -->
                                             <form action="/New_pond" method="post">
-                                                <%-include('./partials/pondForm.ejs')%>
+                                                <%-include('./Forms/pondForm.ejs')%>
                                         </div>
 
                                     </div>
@@ -69,9 +69,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
 
                         <!-- visualización de tarjetas -->
                         <div class="row row-cols-1 row-cols-sm-4 g-3 mt-5">

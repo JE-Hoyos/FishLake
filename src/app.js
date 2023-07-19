@@ -9,10 +9,10 @@ const flash = require('connect-flash');
 require('dotenv').config();
 require('./Rules/UserRules/auth.js');
 
-//########### inicialización express#############
+//inicialización express
 const app = express();
 
-//#############  Settings  ########################
+//Settings 
 
 //Puerto
 app.set('port', process.env.PORT || 3000);
@@ -24,12 +24,10 @@ app.set('views', path.join(__dirname, 'Interface/views')); // cambiar
 app.set("view engine", "ejs");
 app.use(express.static(app.get('views')));
 
-
-//// Middlewares
+// Middlewares
 
 //implementar morgan
 app.use(morgan('dev'));
-
 //implementar urlencode y json para aceptar datos que llegan de formularios
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
@@ -39,15 +37,13 @@ app.use(sessions({
     resave: false,
     saveUninitialized: false
 }));
-
 //Flash
 app.use(flash());
-
 //Passport-auth
 app.use(passport.initialize());
 app.use(passport.session());
 
-//mensajes de autentificación
+//Variables locales
 app.use((req, res, next) => {
     app.locals.signUpErr = req.flash('signUpErr');
     app.locals.signInErr = req.flash('signInErr');
@@ -56,16 +52,14 @@ app.use((req, res, next) => {
     next();
 });
 
-//################# Routes ###################################
+//Routes 
 // user services
 app.use(require(path.join(__dirname, './Routes/UserRoutes/views.js')));
 app.use(require(path.join(__dirname, './Routes/UserRoutes/auth.js')));
-
-
 //erp services
 app.use(require(path.join(__dirname, './Routes/EprRoutes/systemRoutes.js')));
 
-//################ Static files ##############################
+// Static files 
 app.use(express.static(path.join(__dirname, 'Interface/public')));
 
 //export
